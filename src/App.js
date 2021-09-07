@@ -15,6 +15,7 @@ function App() {
   return (
     <main>
       Hello world from miyad!
+      Lets make a second check!
     </main>
   );
 }
