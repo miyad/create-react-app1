@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import './App.css';
+import Test from './Components/Test';
 
 function App() {
   const [date, setDate] = useState(null);
@@ -16,6 +17,7 @@ function App() {
     <main>
       Hello world from miyad!
       Lets make a second check!
+      <Test/>
     </main>
   );
 }
