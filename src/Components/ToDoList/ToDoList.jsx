@@ -21,19 +21,10 @@ const ToDoList = ({todo,index,isEditMode,setIsEditing}) => {
     }
     if(isEditMode){
         setIsEditing(false);
+        console.log("editing mode");
     return (
         <div>
-        <center><h4>Todo List</h4></center>
-            <hr />
-        <div className="list">
-            
-            <ol>
-            {todo.map((item,index)=><li key={index}><input type={"text"} defaultValue={item}/></li>)}
-            <li>
-                <input type="text" placeholder={"Enter a task"}></input>
-            </li>
-            </ol>
-        </div>
+       
         </div>
     );  
     }
