@@ -1,24 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useEffect, useState } from 'react';
 import './App.css';
+import AddUser from './Components/AddUser/AddUser';
 import Test from './Components/Test';
+import ParentUser from './Components/User/ParentUser';
+import User from './Components/User/User';
+import {UserContextProvider} from './Components/UserContext';
+import {UserContext} from './Components/UserContext';
 
 function App() {
-  const [date, setDate] = useState(null);
-  useEffect(() => {
-    async function getDate() {
-      const res = await fetch('/api/date');
-      const newDate = await res.text();
-      setDate(newDate);
-    }
-    getDate();
-  }, []);
+
+ // const [userList,setUserList] = useContext(UserContext);
   return (
-    <main>
-      Hello world from miyad!
-      Lets make a second check!
-      <Test/>
-    </main>
+        
+        <UserContextProvider>
+            <center><h1>User Todo List</h1> </center>
+            
+                {/* {userList.map((user,index)=><User user={user} key={index}/>)} */}
+
+                <ParentUser/>
+                
+                
+              
+            
+        </UserContextProvider>
   );
 }
 

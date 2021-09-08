@@ -1,9 +1,8 @@
 import React, { createContext, useState } from 'react';
 
-export const UserContex = createContext(); 
+export const UserContext = createContext(); 
 
-
-const UserContexProvider = props => {
+export const UserContextProvider = props => {
 
     const [userList, setUserList] = useState(
         [
@@ -19,11 +18,12 @@ const UserContexProvider = props => {
             }
         ]
     );
+     
 
     return (
-        <UserContex.Provider>
+        <UserContext.Provider value={[userList,setUserList]}>
             {props.children}
-        </UserContex.Provider>
+        </UserContext.Provider>
     );
 }
 

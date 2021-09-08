@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
+import {UserContext} from './UserContext';
 
 const sad = () =>{
     console.log("hello world");
@@ -9,10 +10,20 @@ const sad = () =>{
 }
 
 const Test = () => {
+    const [userList,setUserList] = useContext(UserContext);
+    console.log("i am executed");
+   // console.log(userList);
     return (
-        <div>
-            This is test
-        </div>
+       <div >
+          { 
+              userList.map((user,index)=><li key={index}>{user.name}</li> )
+          }
+    
+
+          <button onClick={()=>setUserList([...userList,{name:"masum",email:"asdfas",todo:[]}])}>
+              change
+          </button>
+       </div>
     );
 }
 
