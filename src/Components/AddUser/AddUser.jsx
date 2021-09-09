@@ -15,12 +15,18 @@ const validateEmail = (email)=>{
 
 const AddUser = ({title,todo,user,isEditing,setIsEditing,index}) => {
 
-    const [userList,setUserlist] = useContext(UserContext);
+    const [state,dispatch] = useContext(UserContext);
 
     const handleSubmit = (e)=>{
+       // dispatch({type:"1",data:"pass"});
+        //console.log(dispatch({type:"list",data:pass}));
         e.preventDefault();
-        console.log("sumbit triggered!");
-        console.log(info);
+      //  dispatch({type:"3",data:{}});
+        // let ff = dispatch({type:"3",data:"dsa"});
+        // console.log("see what came");
+        // console.log(ff);
+        // console.log("sumbit triggered!");
+        // console.log(info);
         const {name,email} = info;
 
 
@@ -42,15 +48,17 @@ const AddUser = ({title,todo,user,isEditing,setIsEditing,index}) => {
            console.log("index = ",index);
             if(index>=0){
                 setIsEditing(false);
-                info.todo = userList[index].todo;
+                info.todo = userList[index].todo.filter(e=>e.trim(' ').length>0);
                 userList[index] = info;
-                setUserlist([...userList]);
+               // setUserlist([...userList]);
+                console.log("see todo list = ",userList[index].todo);
                 console.log("edit");
             }
             else{
                 
-            
-            setUserlist([info,...userList]);
+              dispatch({type:"addUser",data:{name,email,todo:[]}});
+           
+               // setUserlist([info,...userList]);
                 setInfo({name:"",email:"",todo:[]});
             }
 

@@ -3,21 +3,25 @@ import { UserContext } from '../UserContext';
 import './toDoList.css';
 const ToDoList = ({todo,index,isEditMode,setIsEditing}) => {
 
-    const [userList,setUserList] = useContext(UserContext);
+    const [state,dispatch] = useContext(UserContext);
     const [task,setTask] = useState("");
         const addTodo = ()=>{
             if(task.trim(' ')!==""){
-            userList[index].todo.push(task);
+            dispatch({type:"addTask",data:{index,task}})
+            //userList[index].todo.push(task);
             setTask("");
-            setUserList([...userList]);
+            //setUserList([...userList]);
             }
            // console.log("add task");
         }
 
 
     const removeItem = (itemIndex)=>{
-        userList[index].todo.splice(itemIndex,1);
-        setUserList([...userList]);
+       // userList[index].todo.splice(itemIndex,1);
+        //setUserList([...userList]);
+        console.log(" index of item = ",itemIndex);
+        console.log("before invoke remvoeItem");
+        dispatch({type:"removeTask",data:{index,itemIndex}});
     }
     if(isEditMode){
         setIsEditing(false);
