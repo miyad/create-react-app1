@@ -6,29 +6,21 @@ const ToDoList = ({todo,index,isEditMode,setIsEditing}) => {
     const [state,dispatch,setIsExec,setIsAdd] = useContext(UserContext);
     const [task,setTask] = useState("");
         const addTodo = ()=>{
-            setIsAdd(true);
-            if(task.trim(' ')!==""){
-            dispatch({type:"addTask",data:{index,task}})
-      
-            setTask("");
-  
-            }
-
+                setIsAdd(true);
+                if(task.trim(' ')!==""){
+                    dispatch({type:"addTask",data:{index,task}})
+                    setTask("");    
+                }
         }
 
-
     const removeItem = (itemIndex)=>{
-        setIsExec(true);
-        console.log(" index of item = ",itemIndex);
-        console.log("before invoke remvoeItem");
-        dispatch({type:"removeTask",data:{index,itemIndex}});
-    }
+            setIsExec(true);
+            dispatch({type:"removeTask",data:{index,itemIndex}});
+        }
     if(isEditMode){
         setIsEditing(false);
-        console.log("editing mode");
     return (
-        <div>
-       
+        <div> 
         </div>
     );  
     }

@@ -25,8 +25,6 @@ export const UserContextProvider = props => {
   const reducer = (state,action) => {
         const {data,type} = action;
         const {users} = state
-        console.log("func exec");
-        
         switch(type){
             case "addUser":
                 
@@ -36,10 +34,11 @@ export const UserContextProvider = props => {
             case "delete":
                  return {users:users.filter(user=>user.email!=data)}
             case "edit":
-                state[data.index] = data.info;
+                state.users[data.index] = data.info;
+                console.log("here data = ",data);
                 return {...state};
             case "addTask":
-                console.log("in add , data = ",data);
+                
                 if(isAdd){
                     setIsAdd(false);
                 state.users[data.index].todo.push(data.task);
@@ -47,12 +46,11 @@ export const UserContextProvider = props => {
                 return state;
           
             case "removeTask":
-                    //const df = true;
-                    if(isExect){
+                    
+                if(isExect){
                     state.users[data.index].todo.splice(data.intemIndex,1);
-                    //setIsExec(false);
-                        setIsExec(false);
-                        setIsAdd(false);
+                    setIsExec(false);
+                    setIsAdd(false);
                 }
                 
                 return {users:state.users};
@@ -91,10 +89,6 @@ export const UserContextProvider = props => {
             ]
     }
     const [state,dispatch] = useReducer(reducer,initValue);
-    console.log("see type = ",typeof state);
-    console.log(state);
-    let id = 2;
-
     return (
         <UserContext.Provider value={[state,dispatch,setIsExec,setIsAdd]}>
             {props.children}
