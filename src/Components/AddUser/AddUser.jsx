@@ -16,26 +16,15 @@ const validateEmail = (email)=>{
 const AddUser = ({title,todo,user,isEditing,setIsEditing,index}) => {
 
     const [state,dispatch] = useContext(UserContext);
-
+    const {users:userList} = state;
     const handleSubmit = (e)=>{
-       // dispatch({type:"1",data:"pass"});
-        //console.log(dispatch({type:"list",data:pass}));
+       
         e.preventDefault();
-      //  dispatch({type:"3",data:{}});
-        // let ff = dispatch({type:"3",data:"dsa"});
-        // console.log("see what came");
-        // console.log(ff);
-        // console.log("sumbit triggered!");
-        // console.log(info);
+      
         const {name,email} = info;
 
 
-        // if(info.name.length===0){
-        //     info.name = user.name;
-        // }
-        // if(info.email.length===0){
-        //     info.email = user.email;
-        // }
+       
 
         if(name.trim(' ') === ""|| email.trim(' ') === ""){
             setErrMessage("Name or Email cannot be empty!");
@@ -48,17 +37,22 @@ const AddUser = ({title,todo,user,isEditing,setIsEditing,index}) => {
            console.log("index = ",index);
             if(index>=0){
                 setIsEditing(false);
+               
                 info.todo = userList[index].todo.filter(e=>e.trim(' ').length>0);
                 userList[index] = info;
-               // setUserlist([...userList]);
+
+               // dispatch({type:"edit",data:{index,info}});
+              
                 console.log("see todo list = ",userList[index].todo);
                 console.log("edit");
+
+
             }
             else{
                 
               dispatch({type:"addUser",data:{name,email,todo:[]}});
            
-               // setUserlist([info,...userList]);
+             
                 setInfo({name:"",email:"",todo:[]});
             }
 
@@ -81,7 +75,7 @@ const AddUser = ({title,todo,user,isEditing,setIsEditing,index}) => {
 
                  <br /> <br /><div  value={pemail} className="error">{errMessage}</div> 
             
-            {/* <ToDoList todo={todo}  setIsEditing={setIsEditing}/> */}
+          
             <center><h4>Todo List</h4></center>
             <hr />
         <div className="list">

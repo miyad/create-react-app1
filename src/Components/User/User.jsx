@@ -11,8 +11,8 @@ const User = ({user,index}) => {
 
     const [state,dispatch] = useContext(UserContext);
     if(isEditing){
-       // setIsEditing(false);
-        console.log("is editing now");
+       
+       
         
     return(
         <AddUser title={"Edit User"} user={user} index={index} todo={user.todo} isEditing={isEditing} setIsEditing={setIsEditing}/>

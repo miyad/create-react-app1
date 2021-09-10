@@ -20,40 +20,47 @@ export const UserContextProvider = props => {
     );
 
    const [isExect,setIsExec] = useState(true);
+   const [isAdd,setIsAdd] = useState(true);
+   
   const reducer = (state,action) => {
         const {data,type} = action;
         const {users} = state
         console.log("func exec");
-
+        
         switch(type){
             case "addUser":
+                
                 return {...state,users:[...users,data]};
+              
+                return state;
             case "delete":
                  return {users:users.filter(user=>user.email!=data)}
+            case "edit":
+                state[data.index] = data.info;
+                return {...state};
             case "addTask":
                 console.log("in add , data = ",data);
+                if(isAdd){
+                    setIsAdd(false);
                 state.users[data.index].todo.push(data.task);
+            }
                 return state;
-               
-                //return {users:users};
-                // users[data.index].todo.push(data.task);
+          
             case "removeTask":
-                console.log("in remv, data = ",data);
-               // return {...state};
-            //     if(isExect){
-               //  state.users[data.index].todo.splice(data.itemIndex,1);
-            //     setIsExec(false);
-            // }
-            //return state;
-                let newState = {users:[]};
-                for(let i in state.users)newState.users.push(state.users[i]);
-                newState.users[data.index].todo.splice(data.index,1);
-                return newState;
-                return {...state};
+                    //const df = true;
+                    if(isExect){
+                    state.users[data.index].todo.splice(data.intemIndex,1);
+                    //setIsExec(false);
+                        setIsExec(false);
+                        setIsAdd(false);
+                }
+                
+                return {users:state.users};
                 
             default:
             return state;
         }
+        
     }
     
 
@@ -89,7 +96,7 @@ export const UserContextProvider = props => {
     let id = 2;
 
     return (
-        <UserContext.Provider value={[state,dispatch]}>
+        <UserContext.Provider value={[state,dispatch,setIsExec,setIsAdd]}>
             {props.children}
         </UserContext.Provider>
     );
